@@ -1,23 +1,46 @@
-const axios = require('axios');
+const Rating = require('../models/Rating');
 
-exports.getDailyPuzzle = async (req, res) => {
+// Function to get the rating change compared to the oldest record in the database
+async function getRatingChange(req, res) {
     try {
-        // Fetch the daily puzzle from Lichess API
-        const response = await axios.get('https://lichess.org/api/puzzle/daily');
-        
-        // Log the entire response data to check the structure
-        console.log("Lichess API Response:", response.data);
+        // Fetch the oldest rating in the database
+        const oldestRatingData = await Rating.findOne({}).sort({ timestamp: 1 });
 
-        // Extract the puzzle data, including the FEN string
-        const puzzleData = {
-            id: response.data.puzzle.id,
-            fen: response.data.puzzle.fen,  // Ensure the fen field is correctly extracted
-            solution: response.data.puzzle.solution,
-        };
-        
-        res.json(puzzleData);
+        // Fetch the most recent rating in the database
+        const currentRatingData = await Rating.findOne({}).sort({ timestamp: -1 });
+
+        if (oldestRatingData && currentRatingData) {
+            // Calculate the rating change
+            const ratingChange = currentRatingData.rating - oldestRatingData.rating;
+
+            // Respond with the rating change, the oldest rating, and the current rating
+            res.json({ ratingChange, oldestRating: oldestRatingData.rating, currentRating: currentRatingData.rating });
+        } else {
+            // Handle cases where there isn't enough data to calculate rating change
+            res.json({ error: 'Insufficient data to calculate rating change' });
+        }
     } catch (error) {
-        console.error("Error fetching Lichess daily puzzle:", error);
-        res.status(500).json({ message: 'Failed to fetch Lichess daily puzzle' });
+        console.error('Error fetching rating change:', error);
+        res.status(500).json({ error: 'Failed to calculate rating change' });
     }
+}
+
+// Function to insert a new rating without overwriting old ratings
+async function insertCurrentRating(currentRating) {
+    try {
+        const newRating = new Rating({ rating: currentRating });
+        await newRating.save();
+        console.log('New rating inserted:', currentRating);
+    } catch (error) {
+        console.error('Error inserting new rating:', error);
+    }
+}
+
+module.exports = {
+    getRatingChange,
+    insertCurrentRating
 };
+
+
+
+

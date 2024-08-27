@@ -5,6 +5,7 @@ import XCard from "./XCard";
 import WeatherCard from "./WeatherCard";
 import SpotifyCard from "./SpotifyCard";
 import SpotifyLogic from "./spotifyLogic";
+import XLogic from "./XLogic";
 
 
 export default function CardGrid() {
@@ -16,7 +17,7 @@ export default function CardGrid() {
     }, []);
     
     return (
-        <div className="flex justify-center items-center scale-150">
+        <div className="flex justify-center items-center scale-125">
             <div className="grid grid-cols-8 grid-rows-2 gap-8 w-full max-w-6xl h-[40vh]">
                 <div className="col-span-2 row-span-2">
                     <MLBCard /> {/* Or GitHubCard */}
@@ -35,9 +36,6 @@ export default function CardGrid() {
                 {/* Bottom-right miscellaneous card */}
                 <div className="col-span-2 row-span-1">
                     <WeatherCard /> {/* Or miscellaneous card */}
-                </div>
-                <div>
-                    <SpotifyLogic />
                 </div>
             </div>
         </div>
