@@ -1,10 +1,12 @@
 require('dotenv').config();
 const express = require('express');
-const { getTokensFromAuthorizationCode, ensureAccessToken, getLastPlayedTrack } = require('../controllers/spotify');
+const { getTokensFromAuthorizationCode, ensureAccessToken, getLastPlayedTrack, getNewestReleases } = require('../controllers/spotify');
 const router = express.Router();
 const axios = require('axios');
-const { getRatingChange, insertCurrentRating } = require('../controllers/lichess');
+const { getRatingChange, insertCurrentRating, getLatestLichessBlog } = require('../controllers/lichess');
 const { getTrendingTopics } = require('../controllers/x');
+const { fetchCryptoData } = require('../controllers/crypto');
+const { getLatestMLBNews } = require('../controllers/baseball');
 
 // Store tokens in cookies after successful login
 router.get('/spotify/callback', async (req, res) => {
@@ -93,8 +95,20 @@ router.get('/weather/forecast', async (req, res) => {
     }
 });
 
+// Route to get the latest Lichess blog article
+router.get('/lichess/latest-blog', getLatestLichessBlog);
+
+// Route to get newest releases
+router.get('/spotify/new-releases', ensureAccessToken, getNewestReleases);
+
+// Route to fetch the top 20 cryptocurrencies
+router.get('/crypto', fetchCryptoData);
+
 // Route to fetch the trending topics
 router.get('/x/trending', getTrendingTopics);
+
+// Route to fetch live scores for the San Diego Padres
+router.get('/mlb/latest-news', getLatestMLBNews);
 
 module.exports = router;
 

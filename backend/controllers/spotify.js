@@ -127,9 +127,74 @@ async function getLastPlayedTrack(req, res) {
     }
 }
 
+// Function to get the newest releases from Spotify
+async function getNewestReleases(req, res) {
+    try {
+        // First, make the request to Spotify's New Releases endpoint
+        const response = await axios.get('https://api.spotify.com/v1/browse/new-releases', {
+            headers: {
+                Authorization: `Bearer ${req.accessToken}`, // Pass the access token in the headers
+            },
+            params: {
+                country: 'US', // You can specify a country or leave it out for global releases
+                limit: 10, // Limit the number of releases to fetch
+            },
+        });
+
+        // Extract the albums data from the response
+        const newestReleases = response.data.albums.items;
+
+        // Respond with the album details
+        res.json({
+            releases: newestReleases.map((release) => ({
+                name: release.name,
+                artists: release.artists.map((artist) => artist.name).join(', '),
+                releaseDate: release.release_date,
+                image: release.images[0].url, // Typically the first image is the album cover
+                spotifyUrl: release.external_urls.spotify, // Spotify link to the album
+            })),
+        });
+    } catch (error) {
+        // If the token is expired, handle error or refresh the token logic
+        if (error.response && error.response.status === 401 && req.refreshToken) {
+            console.log('Access token expired, refreshing...');
+
+            // Refresh the token (you should have this logic already in place)
+            const newAccessToken = await refreshAccessToken(req.refreshToken);
+
+            // Retry the request with the new access token
+            const response = await axios.get('https://api.spotify.com/v1/browse/new-releases', {
+                headers: {
+                    Authorization: `Bearer ${newAccessToken}`,
+                },
+                params: {
+                    country: 'US',
+                    limit: 10,
+                },
+            });
+
+            const newestReleases = response.data.albums.items;
+
+            res.json({
+                releases: newestReleases.map((release) => ({
+                    name: release.name,
+                    artists: release.artists.map((artist) => artist.name).join(', '),
+                    releaseDate: release.release_date,
+                    image: release.images[0].url,
+                    spotifyUrl: release.external_urls.spotify,
+                })),
+            });
+        } else {
+            console.error('Error fetching newest releases:', error);
+            res.status(500).json({ error: 'Failed to fetch newest releases' });
+        }
+    }
+}
+
 module.exports = {
     getTokensFromAuthorizationCode,
     ensureAccessToken,
+    getNewestReleases,
     getLastPlayedTrack,
     refreshAccessToken,
 };

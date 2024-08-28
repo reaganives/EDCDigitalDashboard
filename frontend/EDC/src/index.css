@@ -3,3 +3,19 @@
 @tailwind utilities;
 
 @import url('https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,100..900;1,100..900&display=swap');
+
+.crypto-carousel-wrapper {
+    position: relative;
+    overflow: hidden;
+}
+
+.fade-overlay {
+    background: linear-gradient(90deg, #f3f4f6 0%, rgba(255, 255, 255, 0) 10%, rgba(255, 255, 255, 0) 90%, #f3f4f6 100%);
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    pointer-events: none; /* Ensure overlay does not block interactions */
+}
+

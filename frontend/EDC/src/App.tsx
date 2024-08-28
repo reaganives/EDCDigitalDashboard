@@ -10,7 +10,7 @@ function App() {
                 <Route path="/spotify/auth" element={<SpotifyAuth />} />
                 <Route path="/spotify/callback" element={<SpotifyCallback />} />
                 <Route path="/" element={
-                  <div className='mt-[25vh]'>
+                  <div className='absolute justify-center items-center lg:mt-[25vh] mt-[10vh] w-full h-full'>
                   <CardGrid />
                   </div>
                 } />

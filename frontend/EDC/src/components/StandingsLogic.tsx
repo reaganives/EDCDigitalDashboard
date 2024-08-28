@@ -35,12 +35,12 @@ export default function StandingsLogic() {
     };
 
     return (
-        <div className="bg-white rounded-lg">
-            <h2 className="text-xl font-semibold mb-4 text-center font-noto tracking-wide">NL West Division</h2>
+        <div className="bg-white rounded-lg h-fit">
+            <h2 className="md:text-xl text-lg font-semibold mb-4 text-center font-noto tracking-wide">NL West Division</h2>
             {standings ? (
                 <div className="w-full">
                     {/* Table Header */}
-                    <div className="grid grid-cols-5 font-semibold border-b border-gray-300 py-2 text-gray-600">
+                    <div className="grid grid-cols-5 md:text-base text-sm font-semibold border-b border-gray-300 py-2 text-gray-600">
                         <span className="col-span-2 ml-2">Team</span>
                         <span className="text-center">W</span>
                         <span className="text-center">L</span>
@@ -62,15 +62,15 @@ export default function StandingsLogic() {
                                     >
                                         {/* Team Logo */}
                                         <div className="flex items-center col-span-2 justify-start ml-4">
-                                            <img src={getTeamLogo(team.team.name)} alt={team.team.name} className="w-6 h-6 mr-2" />
+                                            <img src={getTeamLogo(team.team.name)} alt={team.team.name} className="md:w-6 md:h-6 w-4 h-4 mr-2" />
                                             {/* <span className="font-medium text-sm">{team.team.name}</span> */}
                                         </div>
                                         {/* Wins */}
-                                        <span className="text-center">{team.wins}</span>
+                                        <span className="text-center md:text-base text-xs">{team.wins}</span>
                                         {/* Losses */}
-                                        <span className="text-center">{team.losses}</span>
+                                        <span className="text-center md:text-base text-xs">{team.losses}</span>
                                         {/* Winning Percentage */}
-                                        <span className="text-center">{calculateWinningPercentage(team.wins, team.losses)}</span>
+                                        <span className="text-center md:text-base text-xs">{calculateWinningPercentage(team.wins, team.losses)}</span>
                                     </li>
                                 ))
                         )}

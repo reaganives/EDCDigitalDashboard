@@ -1,39 +1,60 @@
 import React, { useEffect, useState } from 'react';
 import axios from '../axiosConfig';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faArrowTrendUp, faArrowTrendDown, faChessKnight } from '@fortawesome/free-solid-svg-icons'; // Added the pawn icon
 
 export default function RatingLogic() {
     const [ratingChange, setRatingChange] = useState(null);
     const [currentRating, setCurrentRating] = useState(null);
-    const [oldestRating, setOldestRating] = useState(null);
 
     useEffect(() => {
         axios.get('/lichess/rating-change')
             .then(response => {
-                // Destructure data from the response
-                const { ratingChange, currentRating, oldestRating } = response.data;
-
-                // Ensure values are valid before updating state
+                const { ratingChange, currentRating } = response.data;
                 setRatingChange(ratingChange != null && !isNaN(ratingChange) ? ratingChange : 'N/A');
                 setCurrentRating(currentRating != null && !isNaN(currentRating) ? currentRating : 'N/A');
-                setOldestRating(oldestRating != null && !isNaN(oldestRating) ? oldestRating : 'N/A');
             })
             .catch(error => {
                 console.error('Error fetching rating change:', error);
                 setRatingChange('N/A');
                 setCurrentRating('N/A');
-                setOldestRating('N/A');
             });
     }, []);
 
     return (
-        <div className="rating-change-card">
-            <h2>Rating Change Compared to Oldest Rating</h2>
-            <p>Elo Change: {typeof ratingChange === 'number' ? ratingChange.toFixed(2) : 'N/A'}</p>
-            <p>Current Rating: {typeof currentRating === 'number' ? currentRating.toFixed(2) : 'N/A'}</p>
-            <p>Oldest Rating: {typeof oldestRating === 'number' ? oldestRating.toFixed(2) : 'N/A'}</p>
+        <div className="rating-change-card h-full bg-white rounded-lg shadow-md md:p-4">
+            <h2 className="mt-2 md:text-base text-sm font-noto text-center text-zinc-600">Live Rapid Rating: <span className="text-purple-800 md:text-lg text-base tracking-wide font-noto">{typeof currentRating === 'number' ? currentRating.toFixed(2) : 'N/A'}</span></h2>
+            <div className="flex items-center text-lg mt-4 justify-center">
+                {typeof ratingChange === 'number' ? (
+                    <div className="flex items-center justify-center">
+                        <p className="mr-2 md:text-sm text-xs text-zinc-600 font-noto">Last 10 days: <span className='text-zinc-900 tracking-wide font-noto font-semibold ml-px'>{ratingChange.toFixed(2)}</span></p>
+                        {ratingChange > 0 ? (
+                            <FontAwesomeIcon icon={faArrowTrendUp} className='p-1 text-green-400 mb-px' /> // Green up arrow
+                        ) : ratingChange < 0 ? (
+                            <FontAwesomeIcon icon={faArrowTrendDown} className='p-1 text-red-400 mb-px' /> // Red down arrow
+                        ) : null}
+                    </div>
+                ) : (
+                    <p>Last 10 days: N/A</p>
+                )}
+            </div>
+
+            {/* Button linking to Lichess Daily Puzzle */}
+            <div className="flex justify-center mt-4">
+                <a
+                    href="https://lichess.org/training/daily"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="bg-orange-300 text-white px-4 py-2 rounded-full flex items-center hover:bg-orange-200 transition duration-300"
+                >
+                    <FontAwesomeIcon icon={faChessKnight} className="mr-2" /> Daily Puzzle
+                </a>
+            </div>
         </div>
     );
 }
+
+
 
 
 

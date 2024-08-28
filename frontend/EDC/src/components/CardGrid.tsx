@@ -4,9 +4,7 @@ import MLBCard from "./MLBCard";
 import XCard from "./XCard";
 import WeatherCard from "./WeatherCard";
 import SpotifyCard from "./SpotifyCard";
-import SpotifyLogic from "./spotifyLogic";
-import XLogic from "./XLogic";
-
+import CryptoCarousel from "./CryptoCarousel";
 
 export default function CardGrid() {
     useEffect(() => {
@@ -17,30 +15,51 @@ export default function CardGrid() {
     }, []);
     
     return (
-        <div className="flex justify-center items-center scale-125">
-            <div className="grid grid-cols-8 grid-rows-2 gap-8 w-full max-w-6xl h-[40vh]">
-                <div className="col-span-2 row-span-2">
-                    <MLBCard /> {/* Or GitHubCard */}
+        <div className="flex flex-col justify-center items-center md:min-h-[40vh] min-h-[80vh]"> {/* Ensure it takes at least the full height of the screen */}
+            <div className="grid lg:grid-cols-4 lg:grid-rows-2 grid-cols-2 grid-rows-4 gap-8 w-full lg:max-w-6xl sm:max-w-lg px-8 flex-grow"> {/* Flex-grow added */}
+                <div className="lg:col-span-1 lg:row-span-2 hidden lg:grid">
+                    <MLBCard />
                 </div>
-                <div className="col-span-2 row-span-1">
-                    <LichessCard /> {/* Or GitHubCard */}
+                <div className="lg:col-span-1 lg:row-span-1 hidden lg:grid">
+                    <LichessCard /> 
                 </div>
-                {/* Top-right Spotify card */}
-                <div className="col-span-4 row-span-1">
+                <div className="lg:col-span-2 lg:row-span-1 hidden lg:grid">
                     <SpotifyCard />
                 </div>
-                {/* Bottom-left Twitter-like card */}
-                <div className="col-span-4 row-span-1">
-                    <XCard /> {/* Or TwitterCard */}
+                <div className="lg:col-span-2 lg:row-span-1 hidden lg:grid">
+                    <XCard />
                 </div>
-                {/* Bottom-right miscellaneous card */}
-                <div className="col-span-2 row-span-1">
-                    <WeatherCard /> {/* Or miscellaneous card */}
+                <div className="lg:col-span-1 lg:row-span-1 hidden lg:grid">
+                    <WeatherCard /> 
+                </div>
+
+                {/* Mobile View */}
+
+                <div className="col-span-2 row-span-1 grid lg:hidden">
+                    <SpotifyCard />
+                </div>
+                <div className="col-span-1 row-span-2 grid lg:hidden">
+                    <MLBCard />
+                </div>
+                <div className="col-span-1 row-span-1 grid lg:hidden">
+                    <LichessCard /> 
+                </div>
+                <div className="col-span-1 row-span-1 grid lg:hidden">
+                    <WeatherCard /> 
+                </div>
+                <div className="col-span-2 row-span-1 grid lg:hidden">
+                    <XCard />
+                </div>
+            </div>
+            <div className="mt-8 flex justify-center w-full"> {/* Centered with full width */}
+                <div className="lg:max-w-5xl max-w-lg"> {/* Controlled max-width */}
+                    <CryptoCarousel />
                 </div>
             </div>
         </div>
     );
 }
+
 
 
 
