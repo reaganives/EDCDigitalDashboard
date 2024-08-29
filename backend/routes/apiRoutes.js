@@ -7,7 +7,7 @@ const { getRatingChange, insertCurrentRating, getLatestLichessBlog } = require('
 const { getTrendingTopics } = require('../controllers/x');
 const { fetchCryptoData } = require('../controllers/crypto');
 const { getLatestMLBNews } = require('../controllers/baseball');
-const User = require('./models/User'); // Assuming you have a User model
+const User = require('../models/User');
 
 // Store tokens in cookies after successful login
 router.get('/spotify/callback', async (req, res) => {
