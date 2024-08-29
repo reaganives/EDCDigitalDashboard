@@ -11,7 +11,7 @@ const app = express();
 
 // Enable CORS with default settings (allows all origins)
 app.use(cors({
-    origin: 'http://localhost:5173',
+    origin: ['http://localhost:5173', 'http://ec2-54-241-59-25.us-west-1.compute.amazonaws.com'],  // Add all allowed origins
     credentials: true,
 }));
 
@@ -38,5 +38,6 @@ const PORT = 4000;
 app.listen(PORT, () => {
     console.log(`Server running on port ${PORT}`);
     console.log(`Running in ${process.env.NODE_ENV} mode`);
+    console.log('updated cors')
 });
 

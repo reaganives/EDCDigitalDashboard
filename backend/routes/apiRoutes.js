@@ -15,8 +15,8 @@ router.get('/spotify/callback', async (req, res) => {
         const { accessToken, refreshToken } = await getTokensFromAuthorizationCode(code);
 
         // Set tokens in cookies (httpOnly for security, secure in production)
-        res.cookie('accessToken', accessToken, { httpOnly: true, secure: process.env.NODE_ENV === 'production' });
-        res.cookie('refreshToken', refreshToken, { httpOnly: true, secure: process.env.NODE_ENV === 'production' });
+        res.cookie('accessToken', accessToken, { httpOnly: true, secure: process.env.NODE_ENV === 'production', sameSite: 'none' });
+        res.cookie('refreshToken', refreshToken, { httpOnly: true, secure: process.env.NODE_ENV === 'production', sameSite: 'none' });
 
         console.log('Setting accessToken cookie:', accessToken);
         console.log('Setting refreshToken cookie:', refreshToken);
