@@ -1,25 +1,13 @@
 import React, { useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';  // useNavigate instead of useHistory
-import axios from '../axiosConfig';  // Your configured axios instance
+import { useNavigate } from 'react-router-dom';
 
 export default function SpotifyCallback() {
-    const navigate = useNavigate();  // Updated to use useNavigate
+    const navigate = useNavigate();
 
     useEffect(() => {
-        const urlParams = new URLSearchParams(window.location.search);
-        const code = urlParams.get('code');
-
-        if (code) {
-            // Send the authorization code to the backend to exchange for tokens
-            axios.get(`/api/spotify/callback?code=${code}`)
-                .then(response => {
-                    console.log('Tokens received:', response.data);
-                    navigate('/');  // Use navigate instead of history.push('/')
-                })
-                .catch(error => {
-                    console.error('Error during Spotify authorization:', error);
-                });
-        }
+        // Assuming the backend has already handled the token exchange, 
+        // you can redirect to the desired page.
+        navigate('/');  // Redirect to the homepage or another page after successful authorization
     }, [navigate]);
 
     return (
@@ -28,4 +16,5 @@ export default function SpotifyCallback() {
         </div>
     );
 }
+
 

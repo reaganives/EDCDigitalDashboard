@@ -1,10 +1,11 @@
+require('dotenv').config();  // For loading environment variables
 const express = require('express');
 const cors = require('cors');
 const apiRoutes = require('./routes/apiRoutes');
 const path = require('path');
 const cookieParser = require('cookie-parser');
 const mongoose = require('mongoose');
-require('dotenv').config();  // For loading environment variables
+
 
 const app = express();
 
@@ -36,5 +37,6 @@ app.use('/api', apiRoutes);
 const PORT = 4000;
 app.listen(PORT, () => {
     console.log(`Server running on port ${PORT}`);
+    console.log(`Running in ${process.env.NODE_ENV} mode`);
 });
 
