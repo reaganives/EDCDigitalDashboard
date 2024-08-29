@@ -18,8 +18,12 @@ router.get('/spotify/callback', async (req, res) => {
         res.cookie('accessToken', accessToken, { httpOnly: true, secure: process.env.NODE_ENV === 'production' });
         res.cookie('refreshToken', refreshToken, { httpOnly: true, secure: process.env.NODE_ENV === 'production' });
 
-        // Redirect to your frontend
-        res.redirect('http://localhost:5173');  // Frontend URL
+        console.log('Setting accessToken cookie:', accessToken);
+        console.log('Setting refreshToken cookie:', refreshToken);
+
+
+        // // Redirect to your frontend
+        // res.redirect('http://localhost:5173');  // Frontend URL
     } catch (error) {
         console.error('Error getting tokens:', error);
         res.status(500).send('Authorization failed');
