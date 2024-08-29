@@ -1,18 +1,18 @@
-import { useState } from 'react';
+import { useState, MouseEvent } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSpotify } from "@fortawesome/free-brands-svg-icons";
 import SpotifyLogic from './SpotifyLogic';
 import NewReleases from './NewReleases';
 
 export default function SpotifyCard() {
-    const [isSlideActive, setIsSlideActive] = useState(false); // State to toggle the slide
+    const [isSlideActive, setIsSlideActive] = useState<boolean>(false); // Type the state as boolean
 
     const toggleSlide = () => {
         setIsSlideActive(!isSlideActive);
     };
 
     // Function to stop propagation when clicking on NewReleases
-    const handleNewReleasesClick = (event) => {
+    const handleNewReleasesClick = (event: MouseEvent<HTMLDivElement>) => {
         event.stopPropagation();
     };
 
@@ -43,5 +43,6 @@ export default function SpotifyCard() {
         </div>
     );
 }
+
 
 

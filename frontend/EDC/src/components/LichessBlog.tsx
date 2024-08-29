@@ -1,13 +1,22 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 
-const LichessBlog = () => {
-  const [blog, setBlog] = useState(null);
+// Define the type for the blog object
+interface Blog {
+  title: string;
+  summary: string;
+  link: string;
+  image: string;
+  published: string;
+}
+
+const LichessBlog: React.FC = () => {
+  const [blog, setBlog] = useState<Blog | null>(null);
 
   useEffect(() => {
     const fetchBlog = async () => {
       try {
-        const response = await axios.get('http://localhost:4000/api/lichess/latest-blog');
+        const response = await axios.get('http://ec2-54-241-59-25.us-west-1.compute.amazonaws.com:4000/api/lichess/latest-blog');
         const cleanedSummary = response.data.summary.replace(/<br\s*\/?>/gi, ''); // Removing <br> tags
         setBlog({ ...response.data, summary: cleanedSummary });
       } catch (error) {
@@ -37,6 +46,7 @@ const LichessBlog = () => {
 };
 
 export default LichessBlog;
+
 
 
 

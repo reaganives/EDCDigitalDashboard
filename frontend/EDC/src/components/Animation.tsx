@@ -1,4 +1,3 @@
-import React from 'react';
 import Lottie from 'lottie-react';
 import animationData from '../assets/waiting.json'; // Import your JSON file
 

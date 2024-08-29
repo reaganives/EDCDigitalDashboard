@@ -1,16 +1,24 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import axios from 'axios';
 
+// Define the type for the article object
+interface Article {
+  title: string;
+  url: string;
+  imageUrl: string;
+  publishedAt: string;
+}
+
 const MLBNews = () => {
-  const [article, setArticle] = useState(null);
+  const [article, setArticle] = useState<Article | null>(null);
 
   useEffect(() => {
     const fetchMLBNews = async () => {
       try {
-        const response = await axios.get('http://localhost:4000/api/mlb/latest-news');
+        const response = await axios.get<Article>('http://localhost:4000/api/mlb/latest-news');
         setArticle(response.data);
       } catch (error) {
-        console.error('Error fetching MLB news:', error.message);
+        console.error('Error fetching MLB news:', (error as Error).message);
       }
     };
 
@@ -36,5 +44,6 @@ const MLBNews = () => {
 };
 
 export default MLBNews;
+
 
 

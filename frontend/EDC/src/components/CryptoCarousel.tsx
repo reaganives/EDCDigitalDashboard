@@ -1,8 +1,17 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import axios from '../axiosConfig';
 import Slider from "react-slick"; // Import react-slick
 import "slick-carousel/slick/slick.css"; // Slick carousel default styles
 import "slick-carousel/slick/slick-theme.css"; // Slick carousel theme
+
+// Define the type for each crypto object
+interface Crypto {
+    id: string;
+    image: string;
+    name: string;
+    current_price: number;
+    price_change_percentage_24h: number;
+}
 
 const settings = {
     dots: false, // Disable dots
@@ -18,7 +27,8 @@ const settings = {
 };
 
 export default function CryptoCarousel() {
-    const [cryptoData, setCryptoData] = useState([]);
+    // Use the Crypto type for the state
+    const [cryptoData, setCryptoData] = useState<Crypto[]>([]);
 
     useEffect(() => {
         axios.get('/crypto')
@@ -66,5 +76,6 @@ export default function CryptoCarousel() {
         </div>
     );
 }
+
 
 

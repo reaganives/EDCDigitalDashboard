@@ -1,12 +1,28 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import axios from '../axiosConfig';
 import { WiDaySunny, WiCloud, WiRain, WiSnow, WiThunderstorm, WiFog } from 'react-icons/wi'; // Import specific weather icons
 
+// Define the types for the weather data
+interface WeatherMain {
+    temp: number;
+}
+
+interface Weather {
+    main: string;
+    description: string;
+}
+
+interface WeatherData {
+    main: WeatherMain;
+    weather: Weather[];
+    dt: number;  // timestamp
+}
+
 export default function WeatherLogic() {
-    const [weatherData, setWeatherData] = useState(null);
+    const [weatherData, setWeatherData] = useState<WeatherData[] | null>(null);
 
     useEffect(() => {
-        axios.get('/weather/forecast')
+        axios.get<WeatherData[]>('/weather/forecast')
             .then(response => {
                 setWeatherData(response.data);
             })
@@ -16,12 +32,12 @@ export default function WeatherLogic() {
     }, []);
 
     // Function to convert Celsius to Fahrenheit
-    const convertToFahrenheit = (celsius) => {
+    const convertToFahrenheit = (celsius: number): number => {
         return (celsius * 9/5) + 32;
     };
 
     // Function to get the corresponding weather icon
-    const getWeatherIcon = (weatherCode) => {
+    const getWeatherIcon = (weatherCode: string) => {
         switch (weatherCode) {
             case 'Clear':
                 return <WiDaySunny size={32} />;
@@ -42,7 +58,7 @@ export default function WeatherLogic() {
     };
 
     // Function to format the hour in 12-hour format with AM/PM
-    const formatHour = (timestamp) => {
+    const formatHour = (timestamp: number): string => {
         const date = new Date(timestamp * 1000);
         return date.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', hour12: true });
     };
@@ -55,13 +71,17 @@ export default function WeatherLogic() {
                     <h3 className="md:text-5xl text-4xl font-noto font-semibold text-gray-800 text-center ml-3">
                         {Math.round(convertToFahrenheit(weatherData[0].main.temp))}°F
                     </h3>
-                    <p className="md:text-base text-sm text-gray-500 capitalize tracking-wide">{weatherData[0].weather[0].description}</p>
+                    <p className="md:text-base text-sm text-gray-500 capitalize tracking-wide">
+                        {weatherData[0].weather[0].description}
+                    </p>
 
                     {/* Time-based forecast */}
                     <div className="flex md:mt-8 mt-2 space-x-4 justify-around w-full">
                         {weatherData.slice(0, 5).map((forecast, idx) => (
                             <div key={idx} className="flex flex-col items-center">
-                                <p className="text-xs text-center text-gray-600 md:flex hidden">{formatHour(forecast.dt)}</p>
+                                <p className="text-xs text-center text-gray-600 md:flex hidden">
+                                    {formatHour(forecast.dt)}
+                                </p>
                                 {getWeatherIcon(forecast.weather[0].main)} {/* Dynamically render weather icon */}
                                 <p className="md:text-xl text-lg font-bold text-gray-700">
                                     {Math.round(convertToFahrenheit(forecast.main.temp))}
@@ -76,6 +96,7 @@ export default function WeatherLogic() {
         </div>
     );
 }
+
 
 
 

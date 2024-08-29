@@ -1,11 +1,20 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import axios from '../axiosConfig';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSpotify } from "@fortawesome/free-brands-svg-icons";
 import SoundLogo from './SoundLogo';
 
+// Define the type for the last played track
+interface LastPlayedTrack {
+    name: string;
+    artists: string[];
+    album: string;
+    image: string;
+    spotifyUrl: string;
+}
+
 export default function SpotifyLogic() {
-    const [lastPlayedTrack, setLastPlayedTrack] = useState(null);
+    const [lastPlayedTrack, setLastPlayedTrack] = useState<LastPlayedTrack | null>(null);
 
     useEffect(() => {
         axios.get('/spotify/last-played', { withCredentials: true })
@@ -23,12 +32,12 @@ export default function SpotifyLogic() {
                 <>
                     {/* Left Section: Album Image */}
                     <div className="relative z-10">
-                        <a href={lastPlayedTrack.spotifyUrl} target='_blank'>
-                        <img
-                            src={lastPlayedTrack.image}
-                            alt={`${lastPlayedTrack.album} album cover`}
-                            className="md:w-40 md:h-40 w-24 h-24 rounded-lg object-cover"
-                        />
+                        <a href={lastPlayedTrack.spotifyUrl} target='_blank' rel="noopener noreferrer">
+                            <img
+                                src={lastPlayedTrack.image}
+                                alt={`${lastPlayedTrack.album} album cover`}
+                                className="md:w-40 md:h-40 w-24 h-24 rounded-lg object-cover"
+                            />
                         </a>
                     </div>
 
@@ -68,6 +77,7 @@ export default function SpotifyLogic() {
         </div>
     );
 }
+
 
 
 

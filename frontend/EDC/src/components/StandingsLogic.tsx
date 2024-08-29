@@ -1,10 +1,22 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import axios from '../axiosConfig';
 
-export default function StandingsLogic() {
-    const [standings, setStandings] = useState(null);
+interface TeamRecord {
+    team: {
+        name: string;
+    };
+    wins: number;
+    losses: number;
+}
 
-    const nlWestTeams = [
+interface Division {
+    teamRecords: TeamRecord[];
+}
+
+export default function StandingsLogic() {
+    const [standings, setStandings] = useState<Division[] | null>(null);
+
+    const nlWestTeams: [string, string][] = [
         ['Los Angeles Dodgers', 'https://content.sportslogos.net/logos/54/63/full/los_angeles_dodgers_logo_primary_20127886.png'],
         ['San Diego Padres', 'https://content.sportslogos.net/logos/54/73/full/7517_san_diego_padres-primary-2020.png'],
         ['Arizona Diamondbacks', 'https://content.sportslogos.net/logos/54/50/full/arizona_diamondbacks_logo_primary_20123733.png'],
@@ -24,12 +36,12 @@ export default function StandingsLogic() {
     }, []);
 
     // Function to calculate winning percentage
-    const calculateWinningPercentage = (wins, losses) => {
+    const calculateWinningPercentage = (wins: number, losses: number): string => {
         return (wins / (wins + losses)).toFixed(3); // 3 decimal places
     };
 
     // Function to get the logo for a specific team
-    const getTeamLogo = (teamName) => {
+    const getTeamLogo = (teamName: string): string => {
         const team = nlWestTeams.find(([name]) => name === teamName);
         return team ? team[1] : '';
     };
@@ -82,6 +94,7 @@ export default function StandingsLogic() {
         </div>
     );
 }
+
 
 
 

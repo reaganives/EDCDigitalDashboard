@@ -3,16 +3,21 @@ import Chessboard from 'chessboardjsx';
 import { Chess } from 'chess.js';  // Import chess.js
 import axios from '../axiosConfig';
 
+// Define the type for the puzzle object
+interface Puzzle {
+    solution: string[];  // Array of move strings
+}
+
 export default function DailyPuzzle() {
-    const [position, setPosition] = useState('start');  // Default to start position
-    const [error, setError] = useState(null);
+    const [position, setPosition] = useState<string>('start');  // Default to start position
+    const [error, setError] = useState<string | null>(null);
 
     useEffect(() => {
         axios.get('/lichess/daily-puzzle')
             .then(response => {
                 console.log('Received puzzle data:', response.data);
 
-                const puzzle = response.data;  // Access the puzzle object
+                const puzzle: Puzzle = response.data;  // Access the puzzle object
 
                 // Ensure puzzle and puzzle.solution are available and that solution is an array of strings
                 if (puzzle && Array.isArray(puzzle.solution) && puzzle.solution.length > 0) {
@@ -53,6 +58,7 @@ export default function DailyPuzzle() {
         </div>
     );
 }
+
 
 
 
