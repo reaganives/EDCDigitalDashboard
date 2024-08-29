@@ -2,7 +2,7 @@ import axios, { AxiosInstance, AxiosRequestConfig } from 'axios';
 
 // Create an instance of axios with default settings
 const api: AxiosInstance = axios.create({
-    baseURL: 'http://localhost:4000/api', // Base URL for all requests
+    baseURL: 'http://ec2-54-241-59-25.us-west-1.compute.amazonaws.com:4000/api', // Include http:// or https://
     timeout: 5000, // Timeout after 5 seconds
     headers: {
         'Content-Type': 'application/json',
@@ -26,4 +26,5 @@ api.interceptors.request.use(
 );
 
 export default api;
+
 

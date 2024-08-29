@@ -19,7 +19,7 @@ export default function MLBCard() {
                 }`}
                 onClick={toggleSlide}
             >
-                <div className="flex flex-col items-center justify-between w-full h-full py-10">
+                <div className="flex flex-col items-center justify-between w-full h-full py-8">
                     {/* Icon wrapped in its own div that translates on parent hover */}
                     <div className="md:text-6xl text-5xl text-white transition-transform duration-500 group-hover:translate-y-[8%] group-hover:scale-95 group-hover:-rotate-90">
                         <FontAwesomeIcon icon={faBaseballBall} />

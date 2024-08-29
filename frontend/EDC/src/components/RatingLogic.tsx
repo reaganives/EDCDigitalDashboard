@@ -23,7 +23,7 @@ export default function RatingLogic() {
 
     return (
         <div className="rating-change-card h-full bg-white rounded-lg shadow-md md:p-4">
-            <h2 className="mt-2 md:text-base text-sm font-noto text-center text-zinc-600">Live Rapid Rating: <span className="text-purple-800 md:text-lg text-base tracking-wide font-noto">{typeof currentRating === 'number' ? currentRating.toFixed(2) : 'N/A'}</span></h2>
+            <h2 className="mt-2 md:text-base text-sm font-noto text-center text-zinc-600">Live Rapid Rating: <a href="https://lichess.org/@/maverickofatlas/perf/rapid" target="_blank" className=''><p className="text-purple-800 md:text-lg text-base tracking-wide font-noto hover:scale-105 transition-all duration-300 hover:-translate-y-[2%]">{typeof currentRating === 'number' ? currentRating.toFixed(2) : 'N/A'}</p></a></h2>
             <div className="flex items-center text-lg mt-4 justify-center">
                 {typeof ratingChange === 'number' ? (
                     <div className="flex items-center justify-center">
@@ -40,14 +40,14 @@ export default function RatingLogic() {
             </div>
 
             {/* Button linking to Lichess Daily Puzzle */}
-            <div className="flex justify-center mt-4">
+            <div className="group flex justify-center mt-4 hover:scale-105 transition-all duration-300">
                 <a
                     href="https://lichess.org/training/daily"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="bg-orange-300 text-white px-4 py-2 rounded-full flex items-center hover:bg-orange-200 transition duration-300"
+                    className="bg-orange-300 text-white px-4 py-2 rounded-full flex items-center hover:bg-orange-300/90 transition duration-300"
                 >
-                    <FontAwesomeIcon icon={faChessKnight} className="mr-2" /> Daily Puzzle
+                    <FontAwesomeIcon icon={faChessKnight} className="mr-2 group-hover:rotate-12 transition-all duration-300 group-hover:scale-110" /> Daily Puzzle
                 </a>
             </div>
         </div>

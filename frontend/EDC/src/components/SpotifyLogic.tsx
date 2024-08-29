@@ -23,16 +23,28 @@ export default function SpotifyLogic() {
                 <>
                     {/* Left Section: Album Image */}
                     <div className="relative z-10">
+                        <a href={lastPlayedTrack.spotifyUrl} target='_blank'>
                         <img
                             src={lastPlayedTrack.image}
                             alt={`${lastPlayedTrack.album} album cover`}
                             className="md:w-40 md:h-40 w-24 h-24 rounded-lg object-cover"
                         />
+                        </a>
                     </div>
 
                     {/* Right Section: Track Information */}
-                    <div className="flex flex-col items-start justify-center text-[]#191414] w-2/3 ml-4 relative z-10">
-                        <h2 className="md:text-2xl text-xl font-bold leading-tight mb-1">{lastPlayedTrack.name}</h2>
+                    <div className="flex flex-col items-start justify-center text-[#191414] w-2/3 ml-4 relative z-10">
+                        {/* Make track name clickable */}
+                        <h2 className="md:text-2xl text-xl font-bold leading-tight mb-1">
+                            <a 
+                                href={lastPlayedTrack.spotifyUrl} 
+                                target="_blank" 
+                                rel="noopener noreferrer" 
+                                className="hover:underline"
+                            >
+                                {lastPlayedTrack.name}
+                            </a>
+                        </h2>
                         <p className="md:text-base text-sm text-gray-500 mb-1">{lastPlayedTrack.artists.join(', ')}</p>
                         <p className="md:text-sm text-xs text-gray-600">{lastPlayedTrack.album}</p>
                     </div>
@@ -44,7 +56,7 @@ export default function SpotifyLogic() {
 
                     {/* Badge for Last Played */}
                     <div className="absolute flex top-4 right-4 text-sm text-[#1DB954] font-semibold font-noto tracking-widest px-3 py-1 rounded-full z-10">
-                     <span>Last Played</span>
+                        <span>Last Played</span>
                     </div>
                     <div className="absolute hidden md:flex bottom-40 right-4 text-sm text-[#1DB954] font-semibold px-3 py-1 rounded-full z-10">
                         <SoundLogo />
@@ -56,6 +68,7 @@ export default function SpotifyLogic() {
         </div>
     );
 }
+
 
 
 

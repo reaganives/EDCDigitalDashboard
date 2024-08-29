@@ -6,7 +6,7 @@ const cookieParser = require('cookie-parser');
 // Spotify API credentials
 const clientId = process.env.SPOTIFY_CLIENT_ID;
 const clientSecret = process.env.SPOTIFY_CLIENT_SECRET;
-const redirectUri = `http://localhost:4000/api/spotify/callback`;
+const redirectUri = `http://ec2-54-241-59-25.us-west-1.compute.amazonaws.com:4000/api/spotify/callback`;
 
 // Function to exchange authorization code for access and refresh tokens
 async function getTokensFromAuthorizationCode(code) {
@@ -88,7 +88,8 @@ async function getLastPlayedTrack(req, res) {
             name: lastPlayedTrack.name,
             artists: lastPlayedTrack.artists.map(artist => artist.name),
             album: lastPlayedTrack.album.name,
-            image: albumImages[0].url // Usually the first image is the largest
+            image: albumImages[0].url, // Usually the first image is the largest
+            spotifyUrl: lastPlayedTrack.external_urls.spotify,
         });
 
     } catch (error) {

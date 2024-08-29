@@ -18,7 +18,7 @@ export default function XCard() {
                 }`}
                 onClick={toggleSlide} // Attach the toggle function to onClick
             >
-                <span className="md:text-6xl text-5xl text-white flex justify-center items-center transition-all ease-in-out duration-500 group-hover:scale-105 group-hover:ring group-hover:ring-white">
+                <span className="md:text-6xl text-5xl text-white flex justify-center items-center transition-all ease-in-out duration-500 group-hover:-translate-y-px group-hover:scale-105 group-hover:ring group-hover:ring-white">
                     <FontAwesomeIcon icon={faXTwitter} />
                 </span>
             </div>
