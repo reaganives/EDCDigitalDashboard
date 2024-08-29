@@ -7,6 +7,7 @@ const { getRatingChange, insertCurrentRating, getLatestLichessBlog } = require('
 const { getTrendingTopics } = require('../controllers/x');
 const { fetchCryptoData } = require('../controllers/crypto');
 const { getLatestMLBNews } = require('../controllers/baseball');
+const User = require('./models/User'); // Assuming you have a User model
 
 // Store tokens in cookies after successful login
 router.get('/spotify/callback', async (req, res) => {
@@ -14,16 +15,29 @@ router.get('/spotify/callback', async (req, res) => {
     try {
         const { accessToken, refreshToken } = await getTokensFromAuthorizationCode(code);
 
-        // Set tokens in cookies (httpOnly for security, secure in production)
-        res.cookie('accessToken', accessToken, { httpOnly: true, secure: process.env.NODE_ENV === 'production', sameSite: 'none', domain: 'ec2-54-241-59-25.us-west-1.compute.amazonaws.com' });
-        res.cookie('refreshToken', refreshToken, { httpOnly: true, secure: process.env.NODE_ENV === 'production', sameSite: 'none', domain: 'ec2-54-241-59-25.us-west-1.compute.amazonaws.com' });
+        // Find the existing user document (assuming there's only one user)
+        let user = await User.findOne();
 
-        console.log('Setting accessToken cookie:', accessToken);
-        console.log('Setting refreshToken cookie:', refreshToken);
+        if (!user) {
+            // If the user document doesn't exist, create it
+            user = new User({
+                spotifyAccessToken: accessToken,
+                spotifyRefreshToken: refreshToken,
+                spotifyTokenExpiration: Date.now() + 3600 * 1000, // Token valid for 1 hour
+                // Add any other fields you might need
+            });
+        } else {
+            // Update the existing user document with the new tokens
+            user.spotifyAccessToken = accessToken;
+            user.spotifyRefreshToken = refreshToken;
+            user.spotifyTokenExpiration = Date.now() + 3600 * 1000; // Token valid for 1 hour
+        }
 
+        // Save the user document to the database
+        await user.save();
 
-        // // Redirect to your frontend
-        // res.redirect('http://localhost:5173');  // Frontend URL
+        // Redirect to your frontend
+        res.redirect('http://localhost:5173'); // Or your actual frontend URL
     } catch (error) {
         console.error('Error getting tokens:', error);
         res.status(500).send('Authorization failed');

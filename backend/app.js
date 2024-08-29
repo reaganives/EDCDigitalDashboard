@@ -23,6 +23,7 @@ app.use(express.json());
 
 // Models
 require('./models/Rating');
+require('./models/User');
 
 // MongoDB Connection
 const mongoURI = process.env.MONGO_URI  // Adjust with your URI
@@ -40,4 +41,3 @@ app.listen(PORT, () => {
     console.log(`Running in ${process.env.NODE_ENV} mode`);
     console.log('updated cors')
 });
-
