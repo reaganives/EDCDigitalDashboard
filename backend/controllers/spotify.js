@@ -6,7 +6,7 @@ const cookieParser = require('cookie-parser');
 // Spotify API credentials
 const clientId = process.env.SPOTIFY_CLIENT_ID;
 const clientSecret = process.env.SPOTIFY_CLIENT_SECRET;
-const redirectUri = `http://ec2-54-241-59-25.us-west-1.compute.amazonaws.com:4000/api/spotify/callback`;
+const redirectUri = process.env.SPOTIFY_URI;
 
 // Function to exchange authorization code for access and refresh tokens
 async function getTokensFromAuthorizationCode(code) {
