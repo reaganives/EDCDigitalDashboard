@@ -40,7 +40,7 @@ app.use('/api', apiRoutes);
 
 // Start the server
 const PORT = 4000;
-app.listen(PORT, () => {
+app.listen(PORT, '0.0.0.0', () => {
     console.log(`Server running on port ${PORT}`);
     console.log(`Running in ${process.env.NODE_ENV} mode`);
     console.log('updated cors')
