@@ -1,5 +1,7 @@
 import { useEffect, useState } from 'react';
 import axios from '../axiosConfig';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faArrowTrendUp, faArrowTrendDown, faChessPawn } from '@fortawesome/free-solid-svg-icons';
 
 export default function RatingLogic() {
     const [currentRating, setCurrentRating] = useState<number | null>(null);
@@ -28,32 +30,34 @@ export default function RatingLogic() {
     }, []);
 
     return (
-        <div className="rating-logic w-full h-full flex justify-center items-center p-2">
-            <h2 className="mt-2 md:text-base text-sm font-noto text-center text-zinc-600">
-                Live Rapid Rating: 
-                <a 
-                    href="https://lichess.org/@/maverickofatlas/perf/rapid" 
-                    target="_blank" 
-                    className=''
+        <div className="rating-change-card bg-white rounded-lg shadow-md p-4">
+            <h2 className="mt-2 text-md font-noto text-center">Live Rapid Rating: {typeof currentRating === 'number' ? currentRating.toFixed(2) : 'N/A'}</h2>
+            <div className="flex items-center text-lg mt-4 justify-center">
+                {typeof ratingChange === 'number' ? (
+                    <div className="flex items-center justify-center">
+                        <p className="mr-2 text-sm">Last 3 days: {ratingChange.toFixed(2)}</p>
+                        {ratingChange > 0 ? (
+                            <FontAwesomeIcon icon={faArrowTrendUp} className='p-2 text-green-400' /> // Green up arrow
+                        ) : ratingChange < 0 ? (
+                            <FontAwesomeIcon icon={faArrowTrendDown} className='p-2 text-red-400' /> // Red down arrow
+                        ) : null}
+                    </div>
+                ) : (
+                    <p>Last 3 days: N/A</p>
+                )}
+            </div>
+
+            {/* Button linking to Lichess Daily Puzzle */}
+            <div className="flex justify-center mt-4">
+                <a
+                    href="https://lichess.org/training/daily"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="bg-blue-500 text-white px-4 py-2 rounded-full flex items-center hover:bg-blue-600 transition duration-300"
                 >
-                    <p className="text-purple-800 md:text-lg text-base tracking-wide font-noto hover:scale-105 transition-all duration-300 hover:-translate-y-[2%]">
-                        {currentRating !== null ? currentRating.toFixed(2) : 'N/A'}
-                    </p>
+                    <FontAwesomeIcon icon={faChessPawn} className="mr-2" /> Daily Puzzle
                 </a>
-            </h2>
-            <div className="flex items-center justify-center mt-4">
-                <p className="mr-2 md:text-sm text-xs text-zinc-600 font-noto">
-                    Last 10 days: 
-                    <span className='text-zinc-900 tracking-wide font-noto font-semibold ml-px'>
-                        {ratingChange !== null ? ratingChange.toFixed(2) : 'N/A'}
-                    </span>
-                </p>
             </div>
         </div>
     );
 }
-
-
-
-
-
