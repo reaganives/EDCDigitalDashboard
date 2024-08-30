@@ -13,7 +13,7 @@ function App() {
                 <Route path="/spotify/callback" element={<SpotifyCallback />} />
                 <Route path="/" element={
                   <div className='lg:mt-[25vh] mt-[10vh]'>
-                    <h1 className='text-6xl font-bold text-center tracking-wide mb-10'>REAGAN'S DIGITAL EDC.</h1>
+                    <h1 className='text-6xl font-bold text-center tracking-wide mb-10'>REAGAN'S DIGITAL EDC</h1>
                     <CardGrid />
                   </div>
                 } />
