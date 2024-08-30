@@ -38,7 +38,7 @@ export default function TempQuickView() {
     return (
         <div className="weather-card flex flex-col items-center justify-center">
             {weatherData && weatherData.length > 0 && (
-                <div className="flex flex-col items-center">
+                <div className="flex flex-col items-center justify-center">
                     {/* Current Temp Display */}
                     <h3 className="text-lg font-noto font-semibold text-sky-50 text-center">
                         {Math.round(convertToFahrenheit(weatherData[0].main.temp))}°F
