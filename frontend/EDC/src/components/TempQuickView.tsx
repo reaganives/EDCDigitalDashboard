@@ -71,12 +71,6 @@ export default function TempQuickView() {
                     <h3 className="text-lg font-noto font-semibold text-sky-50 text-center">
                         {Math.round(convertToFahrenheit(weatherData[0].main.temp))}°F
                     </h3>
-                    {/* Display Weather Icon */}
-                    <div>
-                        {getWeatherIcon(weatherData[0].weather[0].main)}
-                    </div>
-                    {/* Display Time */}
-                    <p>{formatHour(weatherData[0].dt)}</p>
                 </div>
             )}
         </div>
