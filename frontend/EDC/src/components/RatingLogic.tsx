@@ -55,7 +55,7 @@ export default function RatingLogic() {
                     rel="noopener noreferrer"
                     className="bg-orange-300 hover:bg-orange-300/90 font-roboto text-white px-4 py-2 rounded-full flex items-center hover:bg-blue-600 transition-all duration-500"
                 >
-                    <span className='group-hover:-rotate-12 transition-all duration-500'><FontAwesomeIcon icon={faChessKnight} className="mr-2" /></span> Daily Puzzle
+                    <span className='group-hover:rotate-12 transition-all duration-500'><FontAwesomeIcon icon={faChessKnight} className="mr-2" /></span> Daily Puzzle
                 </a>
             </div>
         </div>
