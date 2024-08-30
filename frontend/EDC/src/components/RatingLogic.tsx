@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import axios from '../axiosConfig';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faArrowTrendUp, faArrowTrendDown, faChessPawn } from '@fortawesome/free-solid-svg-icons';
+import { faArrowTrendUp, faArrowTrendDown, faChessKnight } from '@fortawesome/free-solid-svg-icons';
 
 export default function RatingLogic() {
     const [currentRating, setCurrentRating] = useState<number | null>(null);
@@ -31,7 +31,7 @@ export default function RatingLogic() {
 
     return (
         <div className="rating-change-card bg-white rounded-lg shadow-md p-4">
-            <h2 className="mt-2 text-md font-noto text-center">Live Rapid Rating: {typeof currentRating === 'number' ? currentRating.toFixed(2) : 'N/A'}</h2>
+            <h2 className="mt-2 text-md font-noto text-center">Live Rapid Rating: <a href="https://lichess.org/@/maverickofatlas/perf/rapid" className='hover:scale-110 transition-all duration-300'>{typeof currentRating === 'number' ? currentRating.toFixed(2) : 'N/A'}</a></h2>
             <div className="flex items-center text-lg mt-4 justify-center">
                 {typeof ratingChange === 'number' ? (
                     <div className="flex items-center justify-center">
@@ -48,14 +48,14 @@ export default function RatingLogic() {
             </div>
 
             {/* Button linking to Lichess Daily Puzzle */}
-            <div className="flex justify-center mt-4">
+            <div className="group flex justify-center mt-4">
                 <a
                     href="https://lichess.org/training/daily"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="bg-blue-500 text-white px-4 py-2 rounded-full flex items-center hover:bg-blue-600 transition duration-300"
+                    className="bg-orange-300 hover:bg-orange-300/90 font-roboto text-white px-4 py-2 rounded-full flex items-center hover:bg-blue-600 transition-all duration-500"
                 >
-                    <FontAwesomeIcon icon={faChessPawn} className="mr-2" /> Daily Puzzle
+                    <span className='group-hover:-rotate-12 transition-all duration-500'><FontAwesomeIcon icon={faChessKnight} className="mr-2" /></span> Daily Puzzle
                 </a>
             </div>
         </div>
