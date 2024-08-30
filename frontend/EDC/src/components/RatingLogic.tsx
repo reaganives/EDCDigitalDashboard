@@ -28,7 +28,7 @@ export default function RatingLogic() {
     }, []);
 
     return (
-        <div className="rating-logic">
+        <div className="rating-logic w-full h-full flex justify-center items-center p-2">
             <h2 className="mt-2 md:text-base text-sm font-noto text-center text-zinc-600">
                 Live Rapid Rating: 
                 <a 
