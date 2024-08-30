@@ -19,7 +19,7 @@ app.get('/health', (req, res) => {
 
 // Enable CORS with default settings (allows all origins)
 app.use(cors({
-    origin: 'https://api.edc.reaganives.io/api',  // Allow all origins (for testing only)
+    origin: 'https://edc.reaganives.io/api',  // Allow all origins (for testing only)
     credentials: true,
 }));
 
