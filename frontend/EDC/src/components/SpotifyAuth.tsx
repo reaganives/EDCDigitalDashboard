@@ -1,7 +1,7 @@
 export default function SpotifyAuth() {
     const redirectToSpotify = () => {
         const clientId = 'e12d917e5afc43c281309b6366f05d76';
-        const redirectUri = encodeURIComponent(`http://ec2-54-241-59-25.us-west-1.compute.amazonaws.com:4000/api/spotify/callback`); // Adjust based on your environment
+        const redirectUri = encodeURIComponent(`https://api.edc.reaganives.io/api/spotify/callback`); // Adjust based on your environment
         const scopes = encodeURIComponent('user-read-recently-played user-read-playback-state');
         
         const authUrl = `https://accounts.spotify.com/authorize?response_type=code&client_id=${clientId}&scope=${scopes}&redirect_uri=${redirectUri}`;

@@ -16,7 +16,7 @@ const LichessBlog: React.FC = () => {
   useEffect(() => {
     const fetchBlog = async () => {
       try {
-        const response = await axios.get('http://ec2-54-241-59-25.us-west-1.compute.amazonaws.com:4000/api/lichess/latest-blog');
+        const response = await axios.get('https://api.edc.reaganives.io/api/lichess/latest-blog');
         const cleanedSummary = response.data.summary.replace(/<br\s*\/?>/gi, ''); // Removing <br> tags
         setBlog({ ...response.data, summary: cleanedSummary });
       } catch (error) {
