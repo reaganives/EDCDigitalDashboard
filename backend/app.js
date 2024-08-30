@@ -10,7 +10,7 @@ const mongoose = require('mongoose');
 const app = express();
 
 app.get('/', (req, res) => {
-    res.status(200).send('Welcome to the API');
+    res.status(200).send('Welcome to the API!');
   });
 
 // Enable CORS with default settings (allows all origins)
