@@ -15,8 +15,8 @@ export default function CardGrid() {
     }, []);
     
     return (
-        <div className="flex flex-col justify-center items-center md:min-h-[45vh] min-h-[80vh]"> {/* Ensure it takes at least the full height of the screen */}
-            <div className="grid lg:grid-cols-4 lg:grid-rows-2 grid-cols-2 grid-rows-4 gap-8 w-full lg:max-w-6xl sm:max-w-lg px-8 flex-grow"> {/* Flex-grow added */}
+        <div className="flex flex-col justify-center items-center "> {/* Ensure it takes at least the full height of the screen */}
+            <div className="grid lg:grid-cols-4 lg:grid-rows-2 grid-cols-2 grid-rows-4 auto-rows-auto md:gap-8 gap-4 w-full lg:max-w-6xl sm:max-w-lg md:px-8 px-2 flex-grow"> {/* Flex-grow added */}
                 <div className="lg:col-span-1 lg:row-span-2 hidden lg:grid">
                     <MLBCard />
                 </div>

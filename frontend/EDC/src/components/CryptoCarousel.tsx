@@ -41,7 +41,7 @@ export default function CryptoCarousel() {
     }, []);
 
     return (
-        <div className="crypto-carousel-wrapper relative w-full max-w-5xl mx-auto overflow-hidden"> {/* Fade edges container */}
+        <div className="crypto-carousel-wrapper relative w-full max-w-5xl overflow-hidden"> {/* Fade edges container */}
             <div className="crypto-carousel w-full relative">
                 {cryptoData.length > 0 ? (
                     <Slider {...settings}>
