@@ -2,7 +2,7 @@ import axios, { AxiosInstance, InternalAxiosRequestConfig } from 'axios';
 
 // Create an instance of axios with default settings
 const api: AxiosInstance = axios.create({
-    baseURL: 'http://ec2-54-241-59-25.us-west-1.compute.amazonaws.com:4000/api', // Include http:// or https://
+    baseURL: 'api.edc.reaganives.io/api', // Include http:// or https://
     timeout: 5000, // Timeout after 5 seconds
     headers: {
         'Content-Type': 'application/json',
