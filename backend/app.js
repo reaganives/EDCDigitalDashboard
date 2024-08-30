@@ -9,6 +9,10 @@ const mongoose = require('mongoose');
 
 const app = express();
 
+app.get('/', (req, res) => {
+    res.status(200).send('Welcome to the API');
+  });
+
 // Enable CORS with default settings (allows all origins)
 app.use(cors({
     origin: ['http://localhost:5173', 'http://ec2-54-241-59-25.us-west-1.compute.amazonaws.com', 'https://edc.reaganives.io/'],  // Add all allowed origins
