@@ -34,7 +34,7 @@ const LichessBlog: React.FC = () => {
   return (
     <div className="relative w-44 h-24 rounded-xl shadow-xl">
       <img src={blog.image} alt={blog.title} className="w-full h-full object-cover rounded-xl shadow-xl" />
-      <div className="absolute inset-0 flex flex-col items-center justify-center text-white p-4 bg-black bg-opacity-25 rounded-xl shadow-xl">
+      <div className="absolute inset-0 flex flex-col items-center justify-center text-white p-4 bg-black bg-opacity-50 rounded-xl shadow-xl">
         <h2 className="text-xs font-bold mb-2">{blog.title}</h2>
         <a href={blog.link} target="_blank" rel="noopener noreferrer" className="text-blue-300 hover:underline text-xs">
           Read more
