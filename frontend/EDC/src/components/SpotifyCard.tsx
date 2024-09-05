@@ -29,7 +29,7 @@ export default function SpotifyCard() {
                     <FontAwesomeIcon icon={faSpotify} />
                 </span>
                 <div
-                    className="lg:flex hidden text-white flex justify-center items-center transition-all duration-500"
+                    className="flex text-white flex justify-center items-center transition-all duration-500"
                     onClick={handleNewReleasesClick} // Prevents toggleSlide from being triggered
                 >
                     <NewReleases />
