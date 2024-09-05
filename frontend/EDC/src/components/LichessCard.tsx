@@ -67,7 +67,7 @@ export default function LichessCard() {
             </div>
 
             {/* Second layer: Rating Logic */}
-            <div className="z-0 relative w-full h-full md:p-6 flex items-center">
+            <div className="z-0 relative w-full h-full md:p-6 flex items-center justify-center">
                 <RatingLogic />
             </div>
         </div>
