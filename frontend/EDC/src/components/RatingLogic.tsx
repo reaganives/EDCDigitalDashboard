@@ -30,7 +30,7 @@ export default function RatingLogic() {
     }, []);
 
     return (
-        <div className="rating-change-card bg-white rounded-lg shadow-md p-4">
+        <div className="rating-change-card flex justify-center items-center bg-white rounded-lg shadow-md p-4">
             <h2 className="mt-2 text-md font-noto text-center">Live Rapid Rating: <a href="https://lichess.org/@/maverickofatlas/perf/rapid" target='_blank' className='hover:scale-110 transition-all duration-300 text-purple-800 font-semibold'>{typeof currentRating === 'number' ? currentRating.toFixed(2) : 'N/A'}</a></h2>
             <div className="flex items-center text-lg mt-4 justify-center">
                 {typeof ratingChange === 'number' ? (
