@@ -37,7 +37,7 @@ const fadeInVariants = {
     opacity: 1,
     transition: {
       duration: 1,
-      delay: 3, // Keep the delay for the CryptoCarousel fade-in
+      delay: 1, // Delay before the fade-in
     },
   },
 };
@@ -47,6 +47,9 @@ export default function CardGrid() {
   const [startAnimation, setStartAnimation] = useState(false); // Control card animations
 
   useEffect(() => {
+    // Add background class on mount
+    document.body.classList.add('bg-gray-100');
+
     // Set loading to false after a certain duration
     const timer = setTimeout(() => {
       setLoading(false);
@@ -56,15 +59,20 @@ export default function CardGrid() {
       }, 200);
     }, 1750);
 
-    return () => clearTimeout(timer);
+    return () => {
+      clearTimeout(timer);
+      document.body.classList.remove('bg-gray-100');
+    };
   }, []);
+
+  // If loading is true, show the Loading component
+  if (loading) {
+    return <Loading />;
+  }
 
   return (
     <div>
-      {/* Show the Loading animation until loading is finished */}
-      {loading && <Loading />}
-
-      {/* Render the CardGrid immediately but keep it hidden while loading */}
+      {/* The rest of the components with the global opacity transition */}
       <div
         className={`flex flex-col justify-center items-center transition-opacity duration-500 ${loading ? 'opacity-0' : 'opacity-100'}`}
       >
@@ -173,7 +181,7 @@ export default function CardGrid() {
         </div>
       </div>
 
-      {/* Keep the fade-in for CryptoCarousel but remove the parent opacity transition */}
+      {/* CryptoCarousel with its own independent fade-in animation */}
       <motion.div
         className="mt-8 flex justify-center w-full"
         initial="hidden"
@@ -187,4 +195,5 @@ export default function CardGrid() {
     </div>
   );
 }
+
 
