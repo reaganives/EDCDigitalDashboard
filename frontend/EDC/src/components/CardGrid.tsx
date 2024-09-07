@@ -36,7 +36,7 @@ const fadeInVariants = {
     opacity: 1,
     transition: {
       duration: 1,
-      delay: 2, // 2-second delay before the fade-in
+      delay: 1, // 2-second delay before the fade-in
     },
   },
 };
@@ -116,7 +116,7 @@ export default function CardGrid() {
 
                 <motion.div
                     className="col-span-1 row-span-2 grid lg:hidden"
-                    custom="right"
+                    custom="down"
                     initial="hidden"
                     animate="visible"
                     variants={cardVariants}
@@ -126,7 +126,7 @@ export default function CardGrid() {
 
                 <motion.div
                     className="col-span-1 row-span-1 grid lg:hidden"
-                    custom="up"
+                    custom="left"
                     initial="hidden"
                     animate="visible"
                     variants={cardVariants}
@@ -136,7 +136,7 @@ export default function CardGrid() {
 
                 <motion.div
                     className="col-span-1 row-span-1 grid lg:hidden"
-                    custom="down"
+                    custom="right"
                     initial="hidden"
                     animate="visible"
                     variants={cardVariants}
