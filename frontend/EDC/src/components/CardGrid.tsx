@@ -44,11 +44,16 @@ const fadeInVariants = {
 
 export default function CardGrid() {
   const [loading, setLoading] = useState(true); // Track loading state
+  const [startAnimation, setStartAnimation] = useState(false); // Control card animations
 
   useEffect(() => {
     // Set loading to false after 2.25 seconds (or when data is done loading)
     const timer = setTimeout(() => {
       setLoading(false);
+      // Start card animations after loading is done
+      setTimeout(() => {
+        setStartAnimation(true);
+      }, 500); // Add a slight delay if needed
     }, 2250);
 
     return () => clearTimeout(timer);
@@ -69,7 +74,7 @@ export default function CardGrid() {
             className="lg:col-span-1 lg:row-span-2 hidden lg:grid"
             custom="down"
             initial="hidden"
-            animate="visible"
+            animate={startAnimation ? "visible" : "hidden"}
             variants={cardVariants}
           >
             <MLBCard />
@@ -79,7 +84,7 @@ export default function CardGrid() {
             className="lg:col-span-1 lg:row-span-1 hidden lg:grid"
             custom="up"
             initial="hidden"
-            animate="visible"
+            animate={startAnimation ? "visible" : "hidden"}
             variants={cardVariants}
           >
             <LichessCard />
@@ -89,7 +94,7 @@ export default function CardGrid() {
             className="lg:col-span-2 lg:row-span-1 hidden lg:grid"
             custom="right"
             initial="hidden"
-            animate="visible"
+            animate={startAnimation ? "visible" : "hidden"}
             variants={cardVariants}
           >
             <SpotifyCard />
@@ -99,7 +104,7 @@ export default function CardGrid() {
             className="lg:col-span-2 lg:row-span-1 hidden lg:grid"
             custom="left"
             initial="hidden"
-            animate="visible"
+            animate={startAnimation ? "visible" : "hidden"}
             variants={cardVariants}
           >
             <XCard />
@@ -109,7 +114,7 @@ export default function CardGrid() {
             className="lg:col-span-1 lg:row-span-1 hidden lg:grid"
             custom="down"
             initial="hidden"
-            animate="visible"
+            animate={startAnimation ? "visible" : "hidden"}
             variants={cardVariants}
           >
             <WeatherCard />
@@ -120,7 +125,7 @@ export default function CardGrid() {
             className="col-span-2 row-span-1 grid lg:hidden"
             custom="right"
             initial="hidden"
-            animate="visible"
+            animate={startAnimation ? "visible" : "hidden"}
             variants={cardVariants}
           >
             <SpotifyCard />
@@ -130,7 +135,7 @@ export default function CardGrid() {
             className="col-span-1 row-span-2 grid lg:hidden"
             custom="down"
             initial="hidden"
-            animate="visible"
+            animate={startAnimation ? "visible" : "hidden"}
             variants={cardVariants}
           >
             <MLBCard />
@@ -140,7 +145,7 @@ export default function CardGrid() {
             className="col-span-1 row-span-1 grid lg:hidden"
             custom="left"
             initial="hidden"
-            animate="visible"
+            animate={startAnimation ? "visible" : "hidden"}
             variants={cardVariants}
           >
             <LichessCard />
@@ -150,7 +155,7 @@ export default function CardGrid() {
             className="col-span-1 row-span-1 grid lg:hidden"
             custom="right"
             initial="hidden"
-            animate="visible"
+            animate={startAnimation ? "visible" : "hidden"}
             variants={cardVariants}
           >
             <WeatherCard />
@@ -160,7 +165,7 @@ export default function CardGrid() {
             className="col-span-2 row-span-1 grid lg:hidden"
             custom="left"
             initial="hidden"
-            animate="visible"
+            animate={startAnimation ? "visible" : "hidden"}
             variants={cardVariants}
           >
             <XCard />
@@ -170,7 +175,7 @@ export default function CardGrid() {
         <motion.div
           className="mt-8 flex justify-center w-full"
           initial="hidden"
-          animate="visible"
+          animate={startAnimation ? "visible" : "hidden"}
           variants={fadeInVariants} // Apply fade-in variants here
         >
           <div className="lg:max-w-5xl max-w-lg">
