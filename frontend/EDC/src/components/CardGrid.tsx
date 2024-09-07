@@ -52,7 +52,7 @@ export default function CardGrid() {
     // Set loading to false after 1.5 seconds
     const timer = setTimeout(() => {
       setLoading(false);
-    }, 1750);
+    }, 2250);
 
     // Clean up function to remove background class
     return () => {
