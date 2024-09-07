@@ -9,7 +9,7 @@ import CryptoCarousel from "./CryptoCarousel";
 
 // Animation variants for snapping in cards from different directions
 const cardVariants = {
-  hidden: (direction) => ({
+  hidden: (direction: string) => ({
     opacity: 0,
     x: direction === 'left' ? -200 : direction === 'right' ? 200 : 0,
     y: direction === 'up' ? -200 : direction === 'down' ? 200 : 0,
