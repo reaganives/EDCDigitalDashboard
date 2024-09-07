@@ -18,6 +18,4 @@
     right: 0;
     bottom: 0;
     pointer-events: none; /* Ensure overlay does not block interactions */
-    z-index: 10; /* Make sure it's above other elements */
-    opacity: 1 !important; /* Ensure it maintains full opacity */
 }

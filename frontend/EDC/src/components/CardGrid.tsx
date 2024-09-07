@@ -28,7 +28,7 @@ const cardVariants = {
   },
 };
 
-// Fade-in animation for CryptoCarousel with 2-second delay
+// Fade-in animation for CryptoCarousel with a delay
 const fadeInVariants = {
   hidden: {
     opacity: 0,
@@ -37,7 +37,7 @@ const fadeInVariants = {
     opacity: 1,
     transition: {
       duration: 1,
-      delay: 3,
+      delay: 3, // Keep the delay for the CryptoCarousel fade-in
     },
   },
 };
@@ -47,26 +47,23 @@ export default function CardGrid() {
   const [startAnimation, setStartAnimation] = useState(false); // Control card animations
 
   useEffect(() => {
-    // Set loading to false after 2.25 seconds (or when data is done loading)
+    // Set loading to false after a certain duration
     const timer = setTimeout(() => {
       setLoading(false);
       // Start card animations after loading is done
       setTimeout(() => {
         setStartAnimation(true);
-      }, 200); // Add a slight delay if needed
+      }, 200);
     }, 1750);
 
-    return () => {
-        clearTimeout(timer);
-        document.body.classList.remove('bg-gray-100');
-      };
-    }, []);
+    return () => clearTimeout(timer);
+  }, []);
 
   return (
     <div>
       {/* Show the Loading animation until loading is finished */}
       {loading && <Loading />}
-      
+
       {/* Render the CardGrid immediately but keep it hidden while loading */}
       <div
         className={`flex flex-col justify-center items-center transition-opacity duration-500 ${loading ? 'opacity-0' : 'opacity-100'}`}
@@ -174,18 +171,20 @@ export default function CardGrid() {
             <XCard />
           </motion.div>
         </div>
+      </div>
 
-        <motion.div
-            className="mt-8 flex justify-center w-full bg-transparent"
-            initial="hidden"
-            animate="visible"
-            variants={fadeInVariants} // Apply fade-in variants here
+      {/* Keep the fade-in for CryptoCarousel but remove the parent opacity transition */}
+      <motion.div
+        className="mt-8 flex justify-center w-full"
+        initial="hidden"
+        animate="visible"
+        variants={fadeInVariants} // Keep the fade-in variants here
       >
         <div className="lg:max-w-5xl max-w-lg">
           <CryptoCarousel />
         </div>
       </motion.div>
-      </div>
     </div>
   );
 }
+
