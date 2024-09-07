@@ -37,7 +37,7 @@ const fadeInVariants = {
     opacity: 1,
     transition: {
       duration: 1,
-      delay: 1,
+      delay: 3,
     },
   },
 };
@@ -176,15 +176,15 @@ export default function CardGrid() {
         </div>
 
         <motion.div
-          className="mt-8 flex justify-center w-full"
-          initial="hidden"
-          animate={startAnimation ? "visible" : "hidden"}
-          variants={fadeInVariants} // Apply fade-in variants here
-        >
-          <div className="lg:max-w-5xl max-w-lg">
-            <CryptoCarousel />
-          </div>
-        </motion.div>
+            className="mt-8 flex justify-center w-full"
+            initial="hidden"
+            animate="visible"
+            variants={fadeInVariants} // Apply fade-in variants here
+      >
+        <div className="lg:max-w-5xl max-w-lg">
+          <CryptoCarousel />
+        </div>
+      </motion.div>
       </div>
     </div>
   );
