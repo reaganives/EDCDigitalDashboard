@@ -176,7 +176,7 @@ export default function CardGrid() {
         </div>
 
         <motion.div
-            className="mt-8 flex justify-center w-full"
+            className="mt-8 flex justify-center w-full bg-transparent"
             initial="hidden"
             animate="visible"
             variants={fadeInVariants} // Apply fade-in variants here
