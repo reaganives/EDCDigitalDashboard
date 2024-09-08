@@ -56,8 +56,8 @@ export default function CardGrid() {
       // Start card animations after loading is done
       setTimeout(() => {
         setStartAnimation(true);
-      });
-    }, 2500);
+      }, 400);
+    }, 1750);
 
     return () => {
       clearTimeout(timer);
