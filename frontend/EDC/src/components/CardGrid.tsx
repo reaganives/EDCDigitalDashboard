@@ -37,7 +37,7 @@ const fadeInVariants = {
     opacity: 1,
     transition: {
       duration: 1,
-      delay: 1, // Delay before the fade-in
+      delay: 3, // Delay before the fade-in
     },
   },
 };
