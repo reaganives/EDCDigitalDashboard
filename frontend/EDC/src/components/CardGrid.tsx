@@ -12,8 +12,8 @@ import Loading from "./Loading";
 const cardVariants = {
   hidden: (direction: string) => ({
     opacity: 0,
-    x: direction === 'left' ? -200 : direction === 'right' ? 200 : 0,
-    y: direction === 'up' ? -200 : direction === 'down' ? 200 : 0,
+    x: direction === 'left' ? -250 : direction === 'right' ? 250 : 0,
+    y: direction === 'up' ? -250 : direction === 'down' ? 250 : 0,
   }),
   visible: {
     opacity: 1,
