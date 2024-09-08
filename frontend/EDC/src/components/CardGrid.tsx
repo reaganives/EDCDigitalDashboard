@@ -57,7 +57,7 @@ export default function CardGrid() {
       setTimeout(() => {
         setStartAnimation(true);
       }, 450);
-    }, 2200);
+    }, 2500);
 
     return () => {
       clearTimeout(timer);
