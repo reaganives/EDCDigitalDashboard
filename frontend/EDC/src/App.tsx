@@ -10,7 +10,7 @@ function App() {
     return (
         <Router>
             {/* Github Button added here */}
-            <Github url="https://github.com/reaganives/EDC" />
+            <Github url="https://github.com/reaganives/EDC-Digital-Dashboard" />
 
             {/* Routes for different components */}
             <Routes>
