@@ -59,15 +59,15 @@ export default function SpotifyLogic() {
                     </div>
 
                     {/* Spotify Icon in Background */}
-                    <div className="absolute right-[-40px] bottom-[-40px] text-black opacity-80 z-0">
+                    <div className="absolute right-[-40px] bottom-[-40px] text-black/85 opacity-80 z-0">
                         <FontAwesomeIcon icon={faSpotify} size="10x" />
                     </div>
 
                     {/* Badge for Last Played */}
-                    <div className="absolute flex top-4 right-4 text-sm text-[#1DB954] font-semibold font-noto tracking-widest px-3 py-1 rounded-full z-10">
+                    <div className="absolute hidden md:flex top-4 right-4 text-sm text-[#1DB954]/70 font-semibold font-noto tracking-widest pr-8 py-1 rounded-full z-1">
                         <span>Last Played</span>
                     </div>
-                    <div className="absolute hidden md:flex bottom-40 right-4 text-sm text-[#1DB954] font-semibold px-3 py-1 rounded-full z-10">
+                    <div className="absolute hidden md:flex bottom-48 right-0 text-sm text-[#1DB954]/70 font-semibold px-3 py-1 rounded-full z-1 scale-75">
                         <SoundLogo />
                     </div>
                 </>
