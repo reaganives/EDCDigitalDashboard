@@ -19,7 +19,7 @@ app.get('/health', (req, res) => {
 
 // Enable CORS with default settings (allows all origins)
 app.use(cors({
-    origin: ['https://edc.reaganives.io', 'http://localhost:5173'],  // Allow all origins (for testing only)
+    origin: ['https://edc.reaganives.io', 'http://localhost:5173'],
     credentials: true,
 }));
 
