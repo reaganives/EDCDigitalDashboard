@@ -59,21 +59,31 @@ async function getLatestLichessBlog(req, res) {
                 console.error('Error parsing XML:', err);
                 return res.status(500).json({ error: 'Failed to parse Lichess blog data' });
             }
-
-            // Log the parsed XML structure to understand it better
-            // console.log('Parsed XML Structure:', JSON.stringify(result, null, 2));
-
-            // Ensure that the feed and entry exist
+        
             const feed = result.feed;
             const latestEntry = Array.isArray(feed.entry) ? feed.entry[0] : feed.entry;
-
-            // Check if an entry is present
+        
             if (latestEntry) {
-                // Safely access the content and check for an image in the content
-                const content = latestEntry.content ? latestEntry.content._ || latestEntry.content : 'No summary available';
-                const image = latestEntry.content && latestEntry.content.img && latestEntry.content.img.$ ? latestEntry.content.img.$.src : 'No image available';
-
-                // Safely access the link field
+                // Extract summary content
+                const content = latestEntry.content 
+                    ? (latestEntry.content._ || latestEntry.content) 
+                    : 'No summary available';
+        
+                // Use media:thumbnail if available
+                let image = 'No image available';
+                if (latestEntry['media:thumbnail'] && latestEntry['media:thumbnail'].$ && latestEntry['media:thumbnail'].$.url) {
+                    image = latestEntry['media:thumbnail'].$.url;
+                } else if (latestEntry.content && latestEntry.content._) {
+                    // Fallback: parse HTML content to find <img>
+                    const cheerio = require('cheerio');
+                    const $ = cheerio.load(latestEntry.content._);
+                    const imgTag = $('img');
+                    if (imgTag && imgTag.attr('src')) {
+                        image = imgTag.attr('src');
+                    }
+                }
+        
+                // Extract link field
                 let link = 'No link available';
                 if (Array.isArray(latestEntry.link)) {
                     const alternateLink = latestEntry.link.find(l => l.$.rel === 'alternate');
@@ -81,8 +91,7 @@ async function getLatestLichessBlog(req, res) {
                 } else if (latestEntry.link && latestEntry.link.$ && latestEntry.link.$.rel === 'alternate') {
                     link = latestEntry.link.$.href;
                 }
-
-                // Send relevant data to the frontend
+        
                 res.json({
                     title: latestEntry.title || 'No title available',
                     summary: content,
@@ -94,7 +103,7 @@ async function getLatestLichessBlog(req, res) {
                 console.error('No blog entries found');
                 res.status(404).json({ error: 'No blog articles found' });
             }
-        });
+        });        
     } catch (error) {
         console.error('Error fetching Lichess blog:', error);
         res.status(500).json({ error: 'Failed to fetch Lichess blog' });
